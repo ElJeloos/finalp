@@ -12,15 +12,17 @@ use App\Http\Controllers\controladorBD;
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
-|
-*/
 
 Route::get('/',[controladorVistas::class,'showWelcome']);
 
 Route::get('Home',[controladorVistas::class,'showHome'])->name('ApodoHome');
+|
+*/
 
 
-Route::get('contacto/create',[controladorBD::class,'create'])->name('contacto.create');
+
+Route::get('/',[controladorVistas::class,'showHome'])->name('ApodoHome');
+Route::get('/',[controladorBD::class,'create'])->name('contacto.create');
 
 
 
@@ -31,9 +33,9 @@ Route::get('contacto/{id}/edit',[controladorBD::class,'edit'])->name('contacto.e
 //store
 Route::post('contacto', [controladorBD::class,'store'])->name('contacto.store');
 
-Route::put('contacto/{id}',[controladorBD::class,'update'])->name('contacto.edit');
+Route::put('contacto/{id}',[controladorBD::class,'update'])->name('contacto.update');
 
 
-Route::get('Eliminar/{id}/show',[controladorBD::class,'show'])->name('contacto.show');
+Route::get('contacto/{id}/show',[controladorBD::class,'show'])->name('contacto.show');
 
 Route::delete('contacto/{id}',[controladorBD::class,'destroy'])->name('contacto.destroy');

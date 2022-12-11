@@ -4,7 +4,7 @@
 
 @if(session()->has('confirmacion'))
     {!!" <script > Swal.fire(
-  'Registro Exitoso',
+  'Contacto Exitoso',
   'Gracias'
 )  </script>"!!}
  @endif
@@ -12,7 +12,14 @@
 
  @if(session()->has('Eliminado'))
     {!!" <script > Swal.fire(
-  'Registro Eliminado',
+  'Contacto Eliminado',
+  'Gracias'
+)  </script>"!!}
+ @endif
+
+ @if(session()->has('Actualizar'))
+    {!!" <script > Swal.fire(
+  'Contacto Actualizado',
   'Gracias'
 )  </script>"!!}
  @endif
@@ -51,7 +58,9 @@
         </form>
         </div>
     </div>
-  </div>       
+  </div>     
+  
+  
 </div>
 
 <div class=" mt-5 col-3">

@@ -17,7 +17,6 @@ class controladorBD extends Controller
     public function index()
     {
         $ConsultaContactos=DB::table('tb_contactos')->get();
-
         return view('Registrar', compact('ConsultaContactos'));
     }
 
@@ -29,7 +28,6 @@ class controladorBD extends Controller
     public function create()
     {
         $ConsultaContactos=DB::table('tb_contactos')->get();
-
         return view('Registrar', compact('ConsultaContactos'));
     }
 
@@ -50,7 +48,7 @@ class controladorBD extends Controller
 
         ]);
 
-        return redirect('contacto/create')->with('confirmacion','Registro exitoso');
+        return redirect('/')->with('confirmacion','Registro exitoso');
     }
 
     /**
@@ -62,7 +60,9 @@ class controladorBD extends Controller
     public function show($id)
     {
         $consultarId=DB::table('tb_contactos')->where('idContacto',$id)->first();
-        return view('eliminar',compact('consultarId'));
+        $ConsultaContactos=DB::table('tb_contactos')->get();
+
+        return view('eliminar',compact('consultarId','ConsultaContactos'));
     }
 
     /**

@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('tb_contactos', function (Blueprint $table) {
             $table->increments('idContacto');
             $table->string('Nombre');
-            $table->integer('Numero');
+            $table->string('Numero');
             $table->timestamps();
         });
     }
