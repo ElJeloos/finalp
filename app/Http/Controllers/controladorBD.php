@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\validadorContactos;
+use DB;
+use Carbon\Carbon;
 
 class controladorBD extends Controller
 {
@@ -13,7 +16,9 @@ class controladorBD extends Controller
      */
     public function index()
     {
-        //
+        $ConsultaContactos=DB::table('tb_contactos')->get();
+
+        return view('Registrar', compact('ConsultaContactos'));
     }
 
     /**
@@ -23,7 +28,9 @@ class controladorBD extends Controller
      */
     public function create()
     {
-        //
+        $ConsultaContactos=DB::table('tb_contactos')->get();
+
+        return view('Registrar', compact('ConsultaContactos'));
     }
 
     /**
@@ -32,9 +39,18 @@ class controladorBD extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(validadorContactos $request)
     {
-        //
+        DB::table('tb_contactos')->insert([
+            "Nombre"=>$request->input('txtnombre'),
+            "Numero"=>$request->input('txtnumero'),
+            "created_at"=>Carbon::now(),
+            "updated_at"=>Carbon::now()
+
+
+        ]);
+
+        return redirect('contacto/create')->with('confirmacion','Registro exitoso');
     }
 
     /**
@@ -45,7 +61,8 @@ class controladorBD extends Controller
      */
     public function show($id)
     {
-        //
+        $consultarId=DB::table('tb_contactos')->where('idContacto',$id)->first();
+        return view('eliminar',compact('consultarId'));
     }
 
     /**
@@ -56,7 +73,8 @@ class controladorBD extends Controller
      */
     public function edit($id)
     {
-        //
+        $consultarId=DB::table('tb_contactos')->where('idContacto',$id)->first();
+        return view('editar',compact('consultarId'));
     }
 
     /**
@@ -66,9 +84,14 @@ class controladorBD extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(validadorContactos $request, $id)
     {
-        //
+        DB::table('tb_contactos')->where('idContacto',$id)->update([
+            "Nombre"=> $request->input('txtnombre'),
+            "Numero"=> $request->input('txtnumero'),
+            "updated_at"=> Carbon::now(),
+        ]);
+        return redirect('Contacto')->with('actualizar','abc');
     }
 
     /**
@@ -79,6 +102,7 @@ class controladorBD extends Controller
      */
     public function destroy($id)
     {
-        //
+        $consultarId=DB::table('tb_contactos')->where('idContacto',$id)->delete();
+        return redirect('Contacto')->with('Eliminado','Actor eliminado');
     }
 }

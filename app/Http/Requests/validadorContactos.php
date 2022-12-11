@@ -13,7 +13,7 @@ class validadorContactos extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,8 @@ class validadorContactos extends FormRequest
     public function rules()
     {
         return [
-            //
+            'txtnombre'=>'required',
+            'txtnumero'=>'required|numeric'
         ];
     }
 }
