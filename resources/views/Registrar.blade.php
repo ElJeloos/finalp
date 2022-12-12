@@ -17,7 +17,7 @@
 )  </script>"!!}
  @endif
 
- @if(session()->has('Actualizar'))
+ @if(session()->has('actualizar'))
     {!!" <script > Swal.fire(
   'Contacto Actualizado',
   'Gracias'
